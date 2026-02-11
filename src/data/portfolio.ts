@@ -6,6 +6,8 @@ export const portfolioData = {
     phone: "+92 3021745943",
     location: "Lahore, Pakistan",
     summary: "Experienced Software Engineer with 3 years of hands-on expertise in designing, developing, testing, and delivering high-quality web applications. Proficient in HTML, CSS, Tailwind CSS, Bootstrap, JavaScript, jQuery, Vue.js, Quasar, React.js, PHP, and leveraging AI tools to enhance development speed. Skilled in creating responsive, user-friendly interfaces and implementing robust backend functionalities.",
+    linkedIn: "https://www.linkedin.com/in/ayesha-siddiqaa?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+    gitHub: "https://github.com/Ayehsa-Siddiqa"
   },
   skills: [
     { name: "HTML", level: 95 },
@@ -13,18 +15,27 @@ export const portfolioData = {
     { name: "Tailwind CSS", level: 90 },
     { name: "Bootstrap", level: 95 },
     { name: "JavaScript", level: 90 },
-    { name: "React.js", level: 85 },
-    { name: "Vue.js (Quasar)", level: 85 },
+    { name: "React.js(Redux Toolkit, Material Ui)", level: 85 },
+    { name: "Vue.js(Tanstack query, Pinia Store)", level: 85 },
     { name: "jQuery", level: 85 },
     { name: "PHP", level: 80 },
-    { name: "SQL / MySQL", level: 85 },
+    { name: "SQL / MySQL / PostgreSQL", level: 85 } 
+
   ],
   experience: [
+      {
+      role: "Software Engineer",
+      company: "Streamed Inc",
+      location: "Lahore",
+      period: "2026 - Present",
+      description: "Building end-to-end web features with Vue.js and Tailwind CSS, integrating APIs, managing server state via TanStack Query, and implementing AI-driven functionality.",
+      technologies: ["HTML", "Tailwind CSS", "Vue js", "Tan Stack Query", "Ai Implementation"],
+    },
     {
       role: "Software Engineer",
       company: "Tossdown Technologies",
       location: "Lahore",
-      period: "2024 - Present",
+      period: "2024 - 2026",
       description: "Working on end-to-end web application development. Delivered full project modules, built reusable components, and integrated APIs.",
       technologies: ["HTML", "Bootstrap", "CSS", "jQuery", "JavaScript", "PHP"],
     },
@@ -44,11 +55,17 @@ export const portfolioData = {
     grade: "3.62 CGPA",
   },
   projects: [
-    { name: "WeEcommerce", url: "https://weecommerce.ca/" },
+    { name: "Orchit Ai", url: "https://www.orchit.ai/" },
+    { name: "Mary Browns", url: "https://marybrowns.com.pk/" },
+    { name: "AmLux Travels", url: "https://amluxtravels.com/" },
+    { name: "Aman's", url: "https://qif.ca/" },
     { name: "Jalal Sons", url: "https://jalalsons.com.pk/" },
-    { name: "Bundu Khan", url: "https://bundukhan.pk/" },
+    { name: "WeEcommerce", url: "https://weecommerce.ca/" },
+    { name: "The Greatest Mithai", url: "https://thegreatestmithai.pk/" },
+    { name: "St.Remy Wholesale", url: "https://stremywholesale.com/" },
     { name: "United City NY", url: "https://www.unitedcityny.com" },
     { name: "Waris Foundation", url: "https://warisfoundation.org" },
     { name: "Tossdown", url: "https://tossdown.com" },
+    { name: "Be Sweet Products", url: "https://besweetproducts.ca/" },
   ],
 };

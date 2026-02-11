@@ -8,7 +8,7 @@ const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
 
 export const metadata: Metadata = {
   title: "Ayesha Siddiqa | Software Engineer",
-  description: "Portfolio of Ayesha Siddiqa - Experienced Software Engineer & Front-End Developer.",
+  description: "Portfolio of Ayesha Siddiqa - Experienced Software Engineer.",
 };
 
 export default function RootLayout({
@@ -29,7 +29,7 @@ export default function RootLayout({
         
 
         <Navbar />
-        <main className="flex-grow">{children}</main>
+        <main className="grow">{children}</main>
         <Footer />
       </body>
     </html>

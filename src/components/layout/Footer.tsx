@@ -16,10 +16,10 @@ export default function Footer() {
           </div>
           
           <div className="flex items-center space-x-6">
-            <a href="#" className="text-gray-400 hover:text-purple-400 transition-colors transform hover:scale-110">
+            <a href={portfolioData.personalInfo.gitHub} target="blank" className="text-gray-400 hover:text-purple-400 transition-colors transform hover:scale-110">
               <Github size={20} />
             </a>
-            <a href="#" className="text-gray-400 hover:text-blue-400 transition-colors transform hover:scale-110">
+            <a href={portfolioData.personalInfo.linkedIn} target="blank" className="text-gray-400 hover:text-blue-400 transition-colors transform hover:scale-110">
               <Linkedin size={20} />
             </a>
             <a href={`mailto:${portfolioData.personalInfo.email}`} className="text-gray-400 hover:text-pink-400 transition-colors transform hover:scale-110">
