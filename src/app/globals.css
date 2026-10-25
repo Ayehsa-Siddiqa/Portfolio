@@ -1,36 +1,46 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0a0a0a;
-  --foreground: #ededed;
-  --primary: #7c3aed; /* Violet 600 */
-  --secondary: #2563eb; /* Blue 600 */
+  --background: #07060b;
+  --foreground: #f4f2fa;
+  --muted: #9a96ab;
+  --primary: #8b5cf6; /* Violet 500 */
+  --secondary: #3b82f6; /* Blue 500 */
   --accent: #f472b6; /* Pink 400 */
+  --lime: #c6f432;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
   --color-primary: var(--primary);
   --color-secondary: var(--secondary);
   --color-accent: var(--accent);
-  
-  --font-sans: 'Inter', sans-serif;
-  --font-heading: 'Outfit', sans-serif;
+  --color-lime: var(--lime);
+
+  --font-sans: var(--font-inter), sans-serif;
+  --font-heading: var(--font-outfit), sans-serif;
+  --font-mono: var(--font-mono-jb), ui-monospace, monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #050505;
-    --foreground: #f8fafc;
-  }
+html {
+  /* Positioned root so scroll-linked animations measure offsets correctly */
+  position: relative;
+  scroll-behavior: smooth;
+  scroll-padding-top: 96px;
+}
+
+html,
+body {
+  /* clip (not hidden) keeps fixed/sticky elements working while blocking sideways scroll */
+  overflow-x: clip;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
-  overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -39,66 +49,80 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Custom Utilities */
 .glass {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .glass-card {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.01) 100%);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 
 .text-gradient {
-  background: linear-gradient(to right, var(--primary), var(--secondary), var(--accent));
+  background: linear-gradient(90deg, #a78bfa, #60a5fa, #f472b6, #a78bfa);
+  background-size: 300% 100%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  animation: shimmer 8s linear infinite;
+}
+
+.text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(244, 242, 250, 0.55);
+}
+
+/* Gradient border that follows the card shape */
+.gradient-border {
+  position: relative;
+}
+.gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.6), rgba(59, 130, 246, 0.15), rgba(244, 114, 182, 0.6));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
 }
 
 /* Background Patterns */
 .bg-grid {
-  background-size: 50px 50px;
-  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-                    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 56px 56px;
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  mask-image: radial-gradient(ellipse at 50% 30%, #000 30%, transparent 75%);
 }
 
 .bg-dots {
-  background-color: transparent;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px);
   background-size: 20px 20px;
 }
 
+.noise {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+}
+
 /* Animations */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes slideUp {
-  from { transform: translateY(20px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
-}
-
-.animate-fade-in {
-  animation: fadeIn 0.8s ease-out forwards;
-}
-
-.animate-slide-up {
-  animation: slideUp 0.8s ease-out forwards;
+@keyframes shimmer {
+  to { background-position: 300% 0; }
 }
 
 @keyframes blob {
   0% { transform: translate(0px, 0px) scale(1); }
-  33% { transform: translate(30px, -50px) scale(1.1); }
-  66% { transform: translate(-20px, 20px) scale(0.9); }
+  33% { transform: translate(40px, -60px) scale(1.15); }
+  66% { transform: translate(-30px, 30px) scale(0.9); }
   100% { transform: translate(0px, 0px) scale(1); }
 }
 
 .animate-blob {
-  animation: blob 7s infinite;
+  animation: blob 14s infinite ease-in-out;
 }
 
 .animation-delay-2000 {
@@ -107,4 +131,153 @@ h1, h2, h3, h4, h5, h6 {
 
 .animation-delay-4000 {
   animation-delay: 4s;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 40s linear infinite;
+}
+
+.animate-marquee-reverse {
+  animation: marquee 45s linear infinite reverse;
+}
+
+.marquee-mask {
+  mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
+}
+
+@keyframes caret {
+  50% { opacity: 0; }
+}
+
+.animate-caret {
+  animation: caret 1s step-end infinite;
+}
+
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 18s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .animate-blob,
+  .animate-marquee,
+  .animate-marquee-reverse,
+  .animate-spin-slow,
+  .text-gradient {
+    animation: none;
+  }
+}
+
+/* Rotating light that travels around a card's border */
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.spin-border::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1.5px;
+  border-radius: inherit;
+  background: conic-gradient(from var(--angle), transparent 55%, #8b5cf6 75%, #c6f432 88%, transparent 100%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: spin-angle 4s linear infinite;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.spin-border-hover::after {
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.group:hover > .spin-border-hover::after,
+.spin-border-hover:hover::after {
+  opacity: 1;
+}
+
+@keyframes spin-angle {
+  to { --angle: 360deg; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spin-border::after { animation: none; }
+}
+
+/* Dark, slim scrollbars everywhere (page, command palette, terminal) */
+html {
+  color-scheme: dark;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(139, 92, 246, 0.45) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(139, 92, 246, 0.4);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(139, 92, 246, 0.7);
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-button {
+  display: none;
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* Lime shine that sweeps across the calligraphy logo on hover */
+.logo-shine {
+  background: linear-gradient(110deg, transparent 35%, rgba(198, 244, 50, 0.95) 50%, transparent 65%);
+  background-size: 300% 100%;
+  background-position: 120% 0;
+  transition: background-position 0.9s ease;
+}
+
+.group:hover .logo-shine {
+  background-position: -20% 0;
+}
+
+/* Every section gets half the gap above and below, so the space between any two
+   neighbouring sections is the same: 40px on mobile, 64px on tablet, 96px on desktop */
+.section-y {
+  padding-block: 20px;
+}
+
+@media (min-width: 640px) {
+  .section-y { padding-block: 32px; }
+}
+
+@media (min-width: 1024px) {
+  .section-y { padding-block: 48px; }
 }
